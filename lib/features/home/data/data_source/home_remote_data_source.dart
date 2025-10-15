@@ -16,7 +16,7 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
     final result = await sl<ApiService>().get(ApiConstants.products);
 
     return result.fold((failure) => Left(failure), (product) {
-      final products = (product)
+      final products = (product as List<dynamic>)
           .map((item) => ProductModel.fromJson(item))
           .toList();
       return Right(products);

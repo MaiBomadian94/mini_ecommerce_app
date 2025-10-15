@@ -11,7 +11,7 @@ class ProductModel {
   ProductModel.fromJson(dynamic json) {
     id = json['id'];
     title = json['title'];
-    price = json['price'];
+    price = (json['price'] as num?)?.toDouble();
     description = json['description'];
     category = json['category'];
     image = json['image'];
@@ -47,7 +47,7 @@ class Rating {
       this.count,});
 
   Rating.fromJson(dynamic json) {
-    rate = json['rate'];
+    rate = (json['rate'] as num?)?.toDouble();
     count = json['count'];
   }
   double? rate;
