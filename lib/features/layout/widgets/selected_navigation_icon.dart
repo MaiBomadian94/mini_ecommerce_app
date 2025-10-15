@@ -1,0 +1,48 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:mini_ecommerce_app/core/helpers/spacing.dart';
+
+import '../../../core/theming/colors.dart';
+import '../../../core/theming/text_styles.dart';
+
+class SelectedNavigationIcon extends StatelessWidget {
+  const SelectedNavigationIcon(
+      {super.key, required this.svgAsset, required this.label});
+
+  final String svgAsset;
+  final String label;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: AppColors.mainBlue,
+        borderRadius: BorderRadius.circular(18),
+
+      ),
+      child: Padding(
+        padding:  EdgeInsets.symmetric(horizontal: 10.w,vertical: 10.h),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            SvgPicture.asset(
+              width: 14.w,
+              height: 14.h,
+              svgAsset,
+              fit: BoxFit.scaleDown,
+              colorFilter:
+              const ColorFilter.mode(AppColors.white, BlendMode.srcIn),
+            ),
+            horizontalSpace(width: 4),
+            Text(
+              label,
+              style: Styles.textTitle14Medium.copyWith(color: AppColors.brandBackground),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
