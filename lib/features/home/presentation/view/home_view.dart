@@ -8,7 +8,7 @@ import '../widgets/banner_slider.dart';
 import '../widgets/custom_brand_list.dart';
 import '../widgets/custom_circular_icon.dart';
 import '../widgets/custom_location_bar.dart';
-import '../widgets/product_card.dart';
+import '../widgets/products_grid_view.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -64,7 +64,7 @@ class HomeView extends StatelessWidget {
                   ],
                 ),
                 verticalSpace(height: 16),
-                CustomProductCard(),
+                ProductsGridView(),
               ],
             ),
           ),

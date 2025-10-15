@@ -10,22 +10,20 @@ class CustomProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Container(
-          width: 183.w,
-          height: 183.h,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16.r),
-            color: AppColors.red,
+    return IntrinsicHeight(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            width: 183.w,
+            height: 183.h,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(16.r),
+              color: AppColors.red,
+            ),
           ),
-        ),
-        verticalSpace(height: 15),
-        SizedBox(
-          width: 183.w,
-          child: Row(
+          verticalSpace(height: 15),
+          Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text('Printed T-Shirt', style: Styles.textTitle14SemiBold),
@@ -38,10 +36,10 @@ class CustomProductCard extends StatelessWidget {
               ),
             ],
           ),
-        ),
-        verticalSpace(height: 3),
-        Text(r'$11.99', style: Styles.textTitle16SemiBold),
-      ],
+          verticalSpace(height: 3),
+          Text(r'$11.99', style: Styles.textTitle16SemiBold),
+        ],
+      ),
     );
   }
 }
