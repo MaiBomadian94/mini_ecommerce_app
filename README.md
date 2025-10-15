@@ -1,16 +1,35 @@
-# mini_ecommerce_app
+# 🛍️ Mini E-Commerce App
 
-A new Flutter project.
+A Flutter-based mini e-commerce application currently under development.  
+This project is being built as part of a technical task to demonstrate clean architecture, responsive UI, and Flutter development best practices.
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+### 🏠 Home View
+✅ **Implemented so far:**
+*  custom elevated button
+*  Location Bar
+*  Banner Slider
+*  Brand List View
+*  Product Card
 
-A few resources to get you started if this is your first Flutter project:
+## 🧱 Project Structure
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+lib/
+├── core/
+│ ├── theming/ → colors, text styles, font weights
+│ ├── helpers/ → spacing, extensions
+│ ├── presentation/ → widgets , bloc
+│ └── routing/ → App routes, route definitions
+│
+├── features/
+│ └── home/
+│ ├── data/
+│ │ ├── models/ 
+│ │ └── repository/ 
+│ ├── domain/ 
+│ └── presentation/
+│ ├── bloc/ → HomeBloc, HomeStates, HomeEvents
+│ ├── views/ → HomeView
+│ └── widgets/ Home Widgets
+│
+└── main.dart → App entry point
