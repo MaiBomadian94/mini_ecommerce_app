@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:mini_ecommerce_app/core/routing/routes.dart';
 
+import '../../features/home/presentation/view/home_view.dart';
+
 class AppRoutes {
   static Route generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case Routes.homeView:
-        return MaterialPageRoute(builder: (context) => const SizedBox());
+        return MaterialPageRoute(builder: (context) => const HomeView());
 
       case Routes.cartView:
         return MaterialPageRoute(builder: (context) => const SizedBox());

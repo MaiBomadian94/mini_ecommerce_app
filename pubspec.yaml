@@ -16,6 +16,7 @@ dependencies:
   cupertino_icons: ^1.0.8
   flutter_svg: ^2.2.1
   flutter_screenutil: ^5.9.3
+  carousel_slider: ^5.1.1
 
 dev_dependencies:
   flutter_test:
@@ -30,6 +31,11 @@ flutter:
 
   assets:
     - assets/images/
+    - assets/images/hm-logo.png
+    - assets/images/lacoste.png
+    - assets/images/zara_logo.png
+    - assets/images/master_card.png
+    - assets/images/banner2.png
     - assets/svgs/
 
 
