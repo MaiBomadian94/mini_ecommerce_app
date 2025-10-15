@@ -21,6 +21,11 @@ class Styles{
     fontWeight: FontWeightHelper.semiBold,
     fontFamily: 'Manrope',
   );
+  static TextStyle textTitle14Medium=TextStyle(
+    fontSize: 14.sp,
+    fontWeight: FontWeightHelper.medium,
+    fontFamily: 'Manrope',
+  );
   static TextStyle textTitle16SemiBold=TextStyle(
     fontSize: 16.sp,
     fontWeight: FontWeightHelper.semiBold,
