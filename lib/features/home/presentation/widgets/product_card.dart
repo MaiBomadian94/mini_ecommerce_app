@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mini_ecommerce_app/core/helpers/spacing.dart';
 import 'package:mini_ecommerce_app/core/theming/text_styles.dart';
@@ -48,10 +49,19 @@ class CustomProductCard extends StatelessWidget {
             ],
           ),
           verticalSpace(height: 3),
-          Text(
-            '${productModel.price ?? ''}',
-            style: Styles.textTitle16SemiBold,
-            overflow: TextOverflow.ellipsis,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                '\$ ${productModel.price ?? 0}',
+                style: Styles.textTitle16SemiBold,
+                overflow: TextOverflow.ellipsis,
+              ),
+              GestureDetector(
+                onTap: () {},
+                child: Icon(Icons.shopping_cart_outlined),
+              ),
+            ],
           ),
         ],
       ),
