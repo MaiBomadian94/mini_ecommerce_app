@@ -5,10 +5,14 @@ import 'package:mini_ecommerce_app/core/helpers/spacing.dart';
 import 'package:mini_ecommerce_app/core/theming/colors.dart';
 import 'package:mini_ecommerce_app/core/theming/text_styles.dart';
 
+import '../../../../core/presentation/widgets/cached_network_image.dart';
+import '../../../home/data/models/product_model.dart';
 import 'counter_widget.dart';
 
 class CustomCartItem extends StatefulWidget {
-  const CustomCartItem({super.key});
+  const CustomCartItem({super.key, required this.productModel});
+
+  final ProductModel productModel;
 
   @override
   State<CustomCartItem> createState() => _CustomCartItemState();
@@ -25,8 +29,13 @@ class _CustomCartItemState extends State<CustomCartItem> {
       children: [
         ClipRRect(
           borderRadius: BorderRadius.circular(16.r),
-          child: Container(color: Colors.red, width: 160.w, height: 160.h),
-          // child: Image.asset('', width: 160.w, height: 160.h),
+          // child: Container(color: Colors.red, width: 160.w, height: 160.h),
+          child:
+          CustomCachedNetworkImage(
+            width: 160.w,
+            height: 160.h,
+            imageUrl:  widget.productModel.image ?? '',
+          ),
         ),
         horizontalSpace(width: 23),
         Expanded(
@@ -34,13 +43,16 @@ class _CustomCartItemState extends State<CustomCartItem> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Women’s Collection',
+                widget.productModel.category ?? "",
                 style: Styles.textTitle12SemiBold.copyWith(
                   color: AppColors.grey,
                 ),
               ),
               verticalSpace(height: 9),
-              Text('Puff Sleeved Blouse', style: Styles.textTitle16SemiBold),
+              Text(
+                widget.productModel.title ?? "",
+                style: Styles.textTitle16SemiBold,
+              ),
               verticalSpace(height: 18),
 
               Row(
@@ -104,7 +116,10 @@ class _CustomCartItemState extends State<CustomCartItem> {
                             height: 18.h,
                           ),
                   ),
-                  Text(r'$16.99', style: Styles.textTitle16SemiBold),
+                  Text(
+                    '\$ ${widget.productModel.price ?? 0}',
+                    style: Styles.textTitle16SemiBold,
+                  ),
                 ],
               ),
             ],

@@ -1,16 +1,26 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mini_ecommerce_app/core/helpers/spacing.dart';
+import 'package:mini_ecommerce_app/core/theming/colors.dart';
 import 'package:mini_ecommerce_app/core/theming/text_styles.dart';
 import 'package:mini_ecommerce_app/features/home/data/models/product_model.dart';
 
 import '../../../../core/presentation/widgets/cached_network_image.dart';
+import '../../../cart/presentation/bloc/bloc.dart';
+import '../../../cart/presentation/bloc/events.dart';
 
-class CustomProductCard extends StatelessWidget {
+class CustomProductCard extends StatefulWidget {
   const CustomProductCard({super.key, required this.productModel});
 
   final ProductModel productModel;
+
+  @override
+  State<CustomProductCard> createState() => _CustomProductCardState();
+}
+
+class _CustomProductCardState extends State<CustomProductCard> {
+  bool isTapped = false;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +31,7 @@ class CustomProductCard extends StatelessWidget {
           CustomCachedNetworkImage(
             width: 183,
             height: 183,
-            imageUrl: productModel.image ?? '',
+            imageUrl: widget.productModel.image ?? '',
           ),
           verticalSpace(height: 15),
           Row(
@@ -29,7 +39,7 @@ class CustomProductCard extends StatelessWidget {
             children: [
               Flexible(
                 child: Text(
-                  productModel.title ?? "",
+                  widget.productModel.title ?? "",
                   style: Styles.textTitle14SemiBold,
                   overflow: TextOverflow.ellipsis,
                   maxLines: 1,
@@ -40,7 +50,7 @@ class CustomProductCard extends StatelessWidget {
                   SvgPicture.asset('assets/svgs/rating_icon.svg'),
                   horizontalSpace(width: 5),
                   Text(
-                    '${productModel.rating?.rate}',
+                    '${widget.productModel.rating?.rate}',
                     style: Styles.textTitle12SemiBold,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -53,13 +63,23 @@ class CustomProductCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                '\$ ${productModel.price ?? 0}',
+                '\$ ${widget.productModel.price ?? 0}',
                 style: Styles.textTitle16SemiBold,
                 overflow: TextOverflow.ellipsis,
               ),
               GestureDetector(
-                onTap: () {},
-                child: Icon(Icons.shopping_cart_outlined),
+                onTap: () {
+                  setState(() {
+                    isTapped = !isTapped;
+                  });
+                  context.read<CartBloc>().add(
+                    AddToCartEvent(widget.productModel),
+                  );
+                },
+                child: Icon(
+                  Icons.shopping_cart_outlined,
+                  color: isTapped ? AppColors.yellow : AppColors.black,
+                ),
               ),
             ],
           ),
