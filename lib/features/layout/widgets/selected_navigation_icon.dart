@@ -7,8 +7,11 @@ import '../../../core/theming/colors.dart';
 import '../../../core/theming/text_styles.dart';
 
 class SelectedNavigationIcon extends StatelessWidget {
-  const SelectedNavigationIcon(
-      {super.key, required this.svgAsset, required this.label});
+  const SelectedNavigationIcon({
+    super.key,
+    required this.svgAsset,
+    required this.label,
+  });
 
   final String svgAsset;
   final String label;
@@ -18,28 +21,31 @@ class SelectedNavigationIcon extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: AppColors.mainBlue,
-        borderRadius: BorderRadius.circular(18),
-
+        borderRadius: BorderRadius.circular(22),
       ),
       child: Padding(
-        padding:  EdgeInsets.symmetric(horizontal: 10.w,vertical: 10.h),
+        padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 14.h),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
             SvgPicture.asset(
-              width: 14.w,
-              height: 14.h,
+              width: 20.w,
+              height: 20.h,
               svgAsset,
               fit: BoxFit.scaleDown,
-              colorFilter:
-              const ColorFilter.mode(AppColors.white, BlendMode.srcIn),
+              colorFilter: const ColorFilter.mode(
+                AppColors.white,
+                BlendMode.srcIn,
+              ),
             ),
             horizontalSpace(width: 4),
             Text(
               label,
-              style: Styles.textTitle14Medium.copyWith(color: AppColors.brandBackground),
-            )
+              style: Styles.textTitle14Medium.copyWith(
+                color: AppColors.brandBackground,
+              ),
+            ),
           ],
         ),
       ),

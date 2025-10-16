@@ -68,3 +68,9 @@ lib/
 - GET https://fakestoreapi.com/products
 
 
+###  🛒 Cart View
+✅ **Implemented so far:**
+*  created cart app bar
+*  added custom_item_cart
+*  added custom_master_card
+*  added counter_widget

@@ -7,14 +7,18 @@ import '../../../../core/theming/colors.dart';
 class CustomCircularIcon extends StatelessWidget {
   const CustomCircularIcon({
     super.key,
-    required this.svgPath,
-    this.backgroundColor, this.width, this.height,
+     this.svgPath,
+    this.backgroundColor,
+    this.width,
+    this.height,
+    this.isIcon,
   });
 
-  final String svgPath;
+  final String? svgPath;
   final Color? backgroundColor;
   final double? width;
   final double? height;
+  final bool? isIcon;
 
   @override
   Widget build(BuildContext context) {
@@ -26,11 +30,19 @@ class CustomCircularIcon extends StatelessWidget {
         shape: BoxShape.circle,
         border: Border.all(color: AppColors.lightGrey, width: 1.5),
       ),
-      child: SvgPicture.asset(
-        svgPath,
-        fit: BoxFit.scaleDown,
-        colorFilter: ColorFilter.mode(AppColors.darkBlue, BlendMode.srcIn),
-      ),
+      child: isIcon == true
+          ? Padding(
+            padding:  EdgeInsets.symmetric(horizontal: 14),
+            child: Icon(Icons.arrow_back_ios),
+          )
+          : SvgPicture.asset(
+              svgPath??'',
+              fit: BoxFit.scaleDown,
+              colorFilter: ColorFilter.mode(
+                AppColors.darkBlue,
+                BlendMode.srcIn,
+              ),
+            ),
     );
   }
 }
