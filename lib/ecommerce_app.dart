@@ -17,7 +17,11 @@ class EcommerceApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => BottomNavigationBloc()),
-        BlocProvider(create: (_) => HomeBloc()..add(GetProductsEvent())),
+        BlocProvider(
+          create: (_) => HomeBloc()
+            ..add(GetProductsEvent())
+            ..add(GetCategoriesEvent()),
+        ),
       ],
       child: ScreenUtilInit(
         designSize: const Size(430, 932),

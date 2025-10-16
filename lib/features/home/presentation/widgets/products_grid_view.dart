@@ -15,7 +15,7 @@ class ProductsGridView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<HomeBloc, HomeStates>(
       builder: (context, state) {
-        if (state is LoadingHomeState) {
+        if (state is LoadingProductsState) {
           return GridView.builder(
             shrinkWrap: true,
             physics: NeverScrollableScrollPhysics(),
@@ -47,7 +47,7 @@ class ProductsGridView extends StatelessWidget {
               return CustomProductCard(productModel: product[index]);
             },
           );
-        } else if (state is FailureHomeState) {
+        } else if (state is FailureProductsState) {
           return Center(
             child: Text(state.message, style: Styles.textTitle16Medium),
           );
