@@ -5,6 +5,7 @@ import 'package:mini_ecommerce_app/core/helpers/spacing.dart';
 import 'package:mini_ecommerce_app/core/theming/colors.dart';
 import 'package:mini_ecommerce_app/core/theming/text_styles.dart';
 import '../widgets/banner_slider.dart';
+import '../widgets/count_down_time.dart';
 import '../widgets/custom_brand_list.dart';
 import '../widgets/custom_circular_icon.dart';
 import '../widgets/custom_location_bar.dart';
@@ -59,6 +60,14 @@ class HomeView extends StatelessWidget {
                             color: AppColors.darkGrey,
                           ),
                         ),
+                        horizontalSpace(width: 8),
+                        CountdownTime(
+                          duration: Duration(
+                            hours: 1,
+                            minutes: 30,
+                            seconds: 20,
+                          ),
+                        ),
                       ],
                     ),
                   ],
@@ -73,4 +82,3 @@ class HomeView extends StatelessWidget {
     );
   }
 }
-
