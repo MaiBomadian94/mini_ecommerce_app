@@ -14,6 +14,10 @@ class ProductsGridView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<HomeBloc, HomeStates>(
+      buildWhen: (prev, curr) =>
+          curr is LoadingProductsState ||
+          curr is SuccessHomeState ||
+          curr is FailureProductsState,
       builder: (context, state) {
         if (state is LoadingProductsState) {
           return GridView.builder(
