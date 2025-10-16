@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mini_ecommerce_app/core/routing/app_routes.dart';
 import 'package:mini_ecommerce_app/core/theming/colors.dart';
+import 'package:mini_ecommerce_app/features/cart/presentation/bloc/bloc.dart';
 import 'package:mini_ecommerce_app/features/home/presentation/bloc/bloc.dart';
 import 'package:mini_ecommerce_app/features/home/presentation/bloc/events.dart';
 
@@ -22,6 +23,7 @@ class EcommerceApp extends StatelessWidget {
             ..add(GetProductsEvent())
             ..add(GetCategoriesEvent()),
         ),
+        BlocProvider(create: (_) => CartBloc()),
       ],
       child: ScreenUtilInit(
         designSize: const Size(430, 932),
