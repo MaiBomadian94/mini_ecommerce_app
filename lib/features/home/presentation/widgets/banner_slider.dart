@@ -16,7 +16,7 @@ class BannerSlider extends StatelessWidget {
     return CarouselSlider(
       options: CarouselOptions(
         height: 151.h,
-        // autoPlay: true,
+         autoPlay: true,
         enlargeCenterPage: true,
       ),
       items: bannerImages.map((imagePath) {

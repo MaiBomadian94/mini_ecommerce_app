@@ -1,47 +1,60 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mini_ecommerce_app/core/helpers/spacing.dart';
-import 'package:mini_ecommerce_app/core/theming/colors.dart';
 import 'package:mini_ecommerce_app/core/theming/text_styles.dart';
+import 'package:mini_ecommerce_app/features/home/data/models/product_model.dart';
+
+import '../../../../core/presentation/widgets/cached_network_image.dart';
 
 class CustomProductCard extends StatelessWidget {
-  const CustomProductCard({super.key});
+  const CustomProductCard({super.key, required this.productModel});
+
+  final ProductModel productModel;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Container(
-          width: 183.w,
-          height: 183.h,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16.r),
-            color: AppColors.red,
+    return IntrinsicHeight(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          CustomCachedNetworkImage(
+            width: 183,
+            height: 183,
+            imageUrl: productModel.image ?? '',
           ),
-        ),
-        verticalSpace(height: 15),
-        SizedBox(
-          width: 183.w,
-          child: Row(
+          verticalSpace(height: 15),
+          Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Printed T-Shirt', style: Styles.textTitle14SemiBold),
+              Flexible(
+                child: Text(
+                  productModel.title ?? "",
+                  style: Styles.textTitle14SemiBold,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                ),
+              ),
               Row(
                 children: [
                   SvgPicture.asset('assets/svgs/rating_icon.svg'),
                   horizontalSpace(width: 5),
-                  Text('4.8', style: Styles.textTitle12SemiBold),
+                  Text(
+                    '${productModel.rating?.rate}',
+                    style: Styles.textTitle12SemiBold,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ],
               ),
             ],
           ),
-        ),
-        verticalSpace(height: 3),
-        Text(r'$11.99', style: Styles.textTitle16SemiBold),
-      ],
+          verticalSpace(height: 3),
+          Text(
+            '${productModel.price ?? ''}',
+            style: Styles.textTitle16SemiBold,
+            overflow: TextOverflow.ellipsis,
+          ),
+        ],
+      ),
     );
   }
 }
