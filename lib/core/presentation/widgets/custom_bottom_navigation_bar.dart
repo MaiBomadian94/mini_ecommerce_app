@@ -68,33 +68,22 @@ class CustomBottomNavigationBar extends StatelessWidget {
                   ),
                   BottomNavigationBarItem(
                     activeIcon: SelectedNavigationIcon(
-                      svgAsset: 'assets/svgs/search_icon.svg',
-                      label: '',
+                      svgAsset: 'assets/svgs/favorite.svg',
+                      label: 'Favorite',
                     ),
                     icon: UnSelectedNavigationIcon(
-                      svgAsset: 'assets/svgs/search_icon.svg',
+                      svgAsset: 'assets/svgs/favorite.svg',
                       label: '',
                     ),
                     label: '',
                   ),
                   BottomNavigationBarItem(
                     activeIcon: SelectedNavigationIcon(
-                      svgAsset: 'assets/svgs/compass.svg',
-                      label: '',
+                      svgAsset: 'assets/svgs/cart.svg',
+                      label: 'Cart',
                     ),
                     icon: UnSelectedNavigationIcon(
-                      svgAsset: 'assets/svgs/compass.svg',
-                      label: '',
-                    ),
-                    label: '',
-                  ),
-                  BottomNavigationBarItem(
-                    activeIcon: SelectedNavigationIcon(
-                      svgAsset: 'assets/svgs/favorite.svg',
-                      label: '',
-                    ),
-                    icon: UnSelectedNavigationIcon(
-                      svgAsset: 'assets/svgs/favorite.svg',
+                      svgAsset: 'assets/svgs/cart.svg',
                       label: '',
                     ),
                     label: '',
@@ -102,7 +91,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
                   BottomNavigationBarItem(
                     activeIcon: SelectedNavigationIcon(
                       svgAsset: 'assets/svgs/user.svg',
-                      label: '',
+                      label: 'Profile',
                     ),
                     icon: UnSelectedNavigationIcon(
                       svgAsset: 'assets/svgs/user.svg',

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mini_ecommerce_app/core/routing/routes.dart';
+import 'package:mini_ecommerce_app/features/cart/presentation/view/cart_view.dart';
 import 'package:mini_ecommerce_app/features/layout/layout_view.dart';
 
 import '../../features/home/presentation/view/home_view.dart';
@@ -11,11 +12,10 @@ class AppRoutes {
         return MaterialPageRoute(builder: (context) => const HomeView());
 
       case Routes.cartView:
-        return MaterialPageRoute(builder: (context) => const SizedBox());
+        return MaterialPageRoute(builder: (context) => const CartView());
 
       case Routes.layout:
         return MaterialPageRoute(builder: (context) => const LayoutView());
-
 
       default:
         return MaterialPageRoute(

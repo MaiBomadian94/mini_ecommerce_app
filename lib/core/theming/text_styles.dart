@@ -12,7 +12,7 @@ class Styles{
 
   static TextStyle textTitle20Bold=TextStyle(
     fontSize: 20.sp,
-    fontWeight: FontWeightHelper.bold,
+    fontWeight: FontWeightHelper.extraBold,
     fontFamily: 'Manrope',
   );
 
