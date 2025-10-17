@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mini_ecommerce_app/core/helpers/extensions.dart';
 import 'package:mini_ecommerce_app/core/presentation/widgets/custom_shimmer_widget.dart';
 import 'package:mini_ecommerce_app/features/home/presentation/bloc/states.dart';
 import 'package:mini_ecommerce_app/features/home/presentation/widgets/product_card.dart';
 
+import '../../../../core/routing/routes.dart';
 import '../../../../core/theming/text_styles.dart';
 import '../bloc/bloc.dart';
 
@@ -48,7 +50,15 @@ class ProductsGridView extends StatelessWidget {
             itemBuilder: (context, index) {
               final product = state.products;
 
-              return CustomProductCard(productModel: product[index]);
+              return InkWell(
+                onTap: () {
+                  context.pushNamed(
+                    Routes.productDetailsView,
+                    arguments: product[index],
+                  );
+                },
+                child: CustomProductCard(productModel: product[index]),
+              );
             },
           );
         } else if (state is FailureProductsState) {

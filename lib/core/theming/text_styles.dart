@@ -42,4 +42,10 @@ class Styles{
     fontWeight: FontWeightHelper.semiBold,
     fontFamily: 'Manrope',
   );
+
+  static TextStyle textTitle24SemiBold=TextStyle(
+    fontSize: 24.sp,
+    fontWeight: FontWeightHelper.extraBold,
+    fontFamily: 'Manrope',
+  );
 }
