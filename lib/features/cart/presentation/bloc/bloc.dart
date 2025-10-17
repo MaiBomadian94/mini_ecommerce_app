@@ -1,32 +1,63 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mini_ecommerce_app/features/cart/presentation/bloc/cart_states.dart';
-import 'package:mini_ecommerce_app/features/home/data/models/product_model.dart';
-import 'events.dart';
+import 'package:mini_ecommerce_app/features/cart/data/models/cart_model.dart';
+import 'package:mini_ecommerce_app/features/cart/presentation/bloc/events.dart';
+import 'package:mini_ecommerce_app/features/cart/presentation/bloc/states.dart';
 
 class CartBloc extends Bloc<CartEvent, CartState> {
   CartBloc() : super(CartInitialState()) {
-    on<AddToCartEvent>(_onAddToCart);
-    on<RemoveFromCartEvent>(_onRemoveFromCart);
-    on<ClearCartEvent>(_onClearCart);
+    on<AddToCartEvent>(addToCart);
+    on<RemoveFromCartEvent>(removeFromCart);
   }
 
-  final List<ProductModel> cartItems = [];
+  final List<CartModel> carts = [];
 
-  void _onAddToCart(AddToCartEvent event, Emitter<CartState> emit) {
-    final exists = cartItems.any((item) => item.id == event.product.id);
-    if (!exists) {
-      cartItems.add(event.product);
-      emit(CartUpdatedState(cartItems: List.unmodifiable(cartItems)));
+  void addToCart(AddToCartEvent event, Emitter<CartState> emit) {
+    final index = carts.indexWhere(
+      (item) => item.product.id == event.product.id,
+    );
+
+    if (index == -1) {
+      carts.add(CartModel(product: event.product));
+    } else {
+      carts[index].quantity++;
     }
+
+    emit(
+      CartUpdatedState(
+        cartItems: List.unmodifiable(carts),
+        totalPrice: calculateTotalPrice(carts),
+      ),
+    );
   }
 
-  void _onRemoveFromCart(RemoveFromCartEvent event, Emitter<CartState> emit) {
-    cartItems.removeWhere((item) => item.id == event.product.id);
-    emit(CartUpdatedState(cartItems: List.unmodifiable(cartItems)));
+  void removeFromCart(RemoveFromCartEvent event, Emitter<CartState> emit) {
+    final index = carts.indexWhere(
+      (item) => item.product.id == event.product.id,
+    );
+
+    if (index != -1) {
+      if (carts[index].quantity > 1) {
+        carts[index].quantity--;
+      } else {
+        carts.removeAt(index);
+      }
+    }
+
+    emit(
+      CartUpdatedState(
+        cartItems: List.unmodifiable(carts),
+        totalPrice: calculateTotalPrice(carts),
+      ),
+    );
   }
 
-  void _onClearCart(ClearCartEvent event, Emitter<CartState> emit) {
-    cartItems.clear();
-    emit(CartUpdatedState(cartItems: List.unmodifiable(cartItems)));
+  double calculateTotalPrice(List<CartModel> carts) {
+    double totalPrice = 0;
+
+    for (var item in carts) {
+      totalPrice += (item.product.price ?? 0) * (item.quantity);
+    }
+
+    return totalPrice;
   }
 }
