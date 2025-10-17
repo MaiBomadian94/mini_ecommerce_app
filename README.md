@@ -82,3 +82,17 @@ lib/
 ###  🛒 Cart View with screenshots
 <img width="1080" height="2400" alt="Image" src="https://github.com/user-attachments/assets/545cc7bb-5477-4340-a0d8-fe47dbc8acaf" />
 
+### 🏆 Bonus Feature – Product Details Page
+
+🔍 Feature Description
+
+* When the user taps on a product in the Home Page, they are navigated to a dedicated Product Details Screen that displays:
+* Product image
+* Title and description
+* Price and rating
+
+<img width="1080" height="2400" alt="Image" src="https://github.com/user-attachments/assets/bc05b744-5dad-41fc-b811-7e9f745a95be" />
+
+
+
+
