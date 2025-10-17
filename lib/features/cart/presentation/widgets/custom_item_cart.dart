@@ -1,26 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mini_ecommerce_app/core/helpers/spacing.dart';
 import 'package:mini_ecommerce_app/core/theming/colors.dart';
 import 'package:mini_ecommerce_app/core/theming/text_styles.dart';
-
+import 'package:mini_ecommerce_app/features/cart/data/models/cart_model.dart';
+import 'package:mini_ecommerce_app/features/cart/presentation/bloc/bloc.dart';
+import 'package:mini_ecommerce_app/features/cart/presentation/bloc/events.dart';
 import '../../../../core/presentation/widgets/cached_network_image.dart';
-import '../../../home/data/models/product_model.dart';
 import 'counter_widget.dart';
 
-class CustomCartItem extends StatefulWidget {
-  const CustomCartItem({super.key, required this.productModel});
+class CustomCartItem extends StatelessWidget {
+  const CustomCartItem({super.key, required this.cartModel});
 
-  final ProductModel productModel;
-
-  @override
-  State<CustomCartItem> createState() => _CustomCartItemState();
-}
-
-class _CustomCartItemState extends State<CustomCartItem> {
-  int initialItem = 1;
-  bool isFavorite = false;
+  final CartModel cartModel;
 
   @override
   Widget build(BuildContext context) {
@@ -29,12 +23,10 @@ class _CustomCartItemState extends State<CustomCartItem> {
       children: [
         ClipRRect(
           borderRadius: BorderRadius.circular(16.r),
-          // child: Container(color: Colors.red, width: 160.w, height: 160.h),
-          child:
-          CustomCachedNetworkImage(
+          child: CustomCachedNetworkImage(
             width: 160.w,
             height: 160.h,
-            imageUrl:  widget.productModel.image ?? '',
+            imageUrl: cartModel.product.image ?? '',
           ),
         ),
         horizontalSpace(width: 23),
@@ -43,14 +35,14 @@ class _CustomCartItemState extends State<CustomCartItem> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                widget.productModel.category ?? "",
+                cartModel.product.category ?? "",
                 style: Styles.textTitle12SemiBold.copyWith(
                   color: AppColors.grey,
                 ),
               ),
               verticalSpace(height: 9),
               Text(
-                widget.productModel.title ?? "",
+                cartModel.product.title ?? "",
                 style: Styles.textTitle16SemiBold,
               ),
               verticalSpace(height: 18),
@@ -60,15 +52,15 @@ class _CustomCartItemState extends State<CustomCartItem> {
                   CounterWidget(
                     icon: Icons.add,
                     onTap: () {
-                      setState(() {
-                        initialItem++;
-                      });
+                      context.read<CartBloc>().add(
+                        AddToCartEvent(cartModel.product),
+                      );
                     },
                   ),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 22.w),
                     child: Text(
-                      initialItem.toString(),
+                      cartModel.quantity.toString(),
                       style: Styles.textTitle16SemiBold,
                     ),
                   ),
@@ -77,10 +69,9 @@ class _CustomCartItemState extends State<CustomCartItem> {
                     icon: Icons.minimize_sharp,
                     yAxis: -8,
                     onTap: () {
-                      if (initialItem > 1) {
-                        initialItem--;
-                      }
-                      setState(() {});
+                      context.read<CartBloc>().add(
+                        RemoveFromCartEvent(cartModel.product),
+                      );
                     },
                   ),
                 ],
@@ -91,33 +82,19 @@ class _CustomCartItemState extends State<CustomCartItem> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        isFavorite = !isFavorite;
-                      });
-                    },
-                    child: isFavorite
-                        ? SvgPicture.asset(
-                            'assets/svgs/selected_favorite.svg',
-                            colorFilter: ColorFilter.mode(
-                              AppColors.darkRed,
-                              BlendMode.srcIn,
-                            ),
-                            width: 19.w,
-                            height: 18.h,
-                          )
-                        : SvgPicture.asset(
-                            'assets/svgs/favorite.svg',
-                            colorFilter: ColorFilter.mode(
-                              AppColors.black,
-                              BlendMode.srcIn,
-                            ),
-                            width: 19.w,
-                            height: 18.h,
-                          ),
+                    onTap: () {},
+                    child: SvgPicture.asset(
+                      'assets/svgs/favorite.svg',
+                      colorFilter: ColorFilter.mode(
+                        AppColors.black,
+                        BlendMode.srcIn,
+                      ),
+                      width: 19.w,
+                      height: 18.h,
+                    ),
                   ),
                   Text(
-                    '\$ ${widget.productModel.price ?? 0}',
+                    '\$ ${cartModel.product.price ?? 0}',
                     style: Styles.textTitle16SemiBold,
                   ),
                 ],

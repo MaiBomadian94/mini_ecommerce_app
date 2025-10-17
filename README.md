@@ -66,11 +66,19 @@ lib/
 
 ## Api Endpoint
 - GET https://fakestoreapi.com/products
+- GET https://fakestoreapi.com/products/categories
+
 
 
 ###  🛒 Cart View
-✅ **Implemented so far:**
+
 *  created cart app bar
 *  added custom_item_cart
 *  added custom_master_card
 *  added counter_widget
+*  created cart view bloc
+*  cart view done ✅
+
+###  🛒 Cart View with screenshots
+<img width="1080" height="2400" alt="Image" src="https://github.com/user-attachments/assets/545cc7bb-5477-4340-a0d8-fe47dbc8acaf" />
+
