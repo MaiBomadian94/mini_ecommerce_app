@@ -14,33 +14,25 @@ class LayoutView extends StatefulWidget {
 }
 
 class _LayoutViewState extends State<LayoutView> {
-  Widget _getCurrentScreen(int index) {
-    switch (index) {
-      case 0:
-        return const HomeView();
-      case 1:
-        return const SizedBox();
-      case 2:
-        return const CartView();
-      case 3:
-        return const SizedBox();
-      default:
-        return const HomeView();
-    }
-  }
+  int currentIndex =0;
+  final List<Widget> screens = [HomeView(), SizedBox(), CartView(), SizedBox()];
+
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: BlocBuilder<BottomNavigationBloc, NavigationStates>(
         builder: (context, state) {
-          int currentIndex = 0;
 
           if (state is ChangeIndexState) {
             currentIndex = state.currentIndex;
           }
 
-          return _getCurrentScreen(currentIndex);
+          return IndexedStack(
+            index: currentIndex,
+            children: screens,
+          );
         },
       ),
       bottomNavigationBar: const CustomBottomNavigationBar(),
