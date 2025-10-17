@@ -36,7 +36,6 @@ class HomeBloc extends Bloc<HomeEvents, HomeStates> {
     return result.fold(
       (failure) => emit(FailureCategoriesState(message: failure.message)),
       (categories) {
-        print("Fetched categories: $categories"); // 👈 debug
         emit(SuccessCategoriesState(category: categories));
       }
     );

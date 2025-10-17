@@ -8,6 +8,7 @@ import 'features/home/data/data_source/home_remote_data_source.dart';
 final sl = GetIt.instance;
 
 Future<void> init() async {
+  // Http
   sl.registerLazySingleton<ApiService>(() => ApiServiceImpl(baseUrl: 'https://fakestoreapi.com'));
 
   // Home
